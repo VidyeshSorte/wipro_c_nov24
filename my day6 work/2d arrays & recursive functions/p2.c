@@ -1,26 +1,59 @@
-// 2. Find sum of digits of a number
+// Find the transpose of a matrix
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int sumOfDigits(int n) 
+void transposeMatrix(int rows, int cols, int matrix[rows][cols], int transpose[cols][rows]) 
 {
-    if (n == 0) 
+    for (int i = 0; i < rows; i++) 
     {
-        return 0;
+        for (int j = 0; j < cols; j++) 
+        {
+            transpose[j][i] = matrix[i][j]; // Swap rows and columns
+        }
     }
-    return (n % 10) + sumOfDigits(n / 10);
+}
+
+void printMatrix(int rows, int cols, int matrix[rows][cols]) 
+{
+    for (int i = 0; i < rows; i++) 
+    {
+        for (int j = 0; j < cols; j++) 
+        {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 int main(int argc, char *argv[]) 
 {
-    if (argc != 2) 
+    if (argc < 5) 
     {
-        printf("Usage: %s <number>\n", argv[0]);
+        printf("Usage: %s <rows> <cols> <matrix_elements>\n", argv[0]);
         return 1;
     }
 
-    int number = atoi(argv[1]);
-    int result = sumOfDigits(number);
+    int rows = atoi(argv[1]);
+    int cols = atoi(argv[2]);
+    int matrix[rows][cols], transpose[cols][rows];
 
-    printf("Sum of digits of %d is %d\n", number, result);
+    int index = 3;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (index < argc) {
+                matrix[i][j] = atoi(argv[index]);
+                index++;
+            } else {
+                printf("Not enough elements provided for the matrix.\n");
+                return 1;
+            }
+        }
+    }
+
+    transposeMatrix(rows, cols, matrix, transpose);
+    printf("Original Matrix:\n");
+    printMatrix(rows, cols, matrix);
+    printf("Transpose of the Matrix:\n");
+    printMatrix(cols, rows, transpose);
 }

@@ -1,25 +1,34 @@
-// 4. Print the Fibo series of N terms (1st 2 terms are 1 and 2)
+//find sum of the total score of all players
 #include <stdio.h>
-#include <stdlib.h>
 
-void printFibonacci(int n, int a, int b) 
+int findSumOfRuns(int *ptr, int size)
 {
-    if (n == 0) 
+}
+void readDetailsOfPlayers(int ptr[11][2])
+{
+    puts("Enter Jersy Number and the runs scored by the 11 players:");
+    for (int i = 0; i < 11; i++)
     {
-        return;
+        printf("Enter Jersy Number of player-%d: ", i + 1);
+        scanf("%d", &ptr[i][0]);
+        printf("Enter runs scored by player-%d: ", i + 1);
+        scanf("%d", &ptr[i][1]);
     }
-    printf("%d ", a);
-    printFibonacci(n - 1, b, a + b);
 }
 
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        printf("Usage: %s <n>\n", argv[0]);
-        return 1;
+void printDetailsOfPlayers(int players[11][2], int rows, int columns)
+{
+    puts("Details of the 11 players are");
+    for (int i = 0; i < 11; i++)
+    {
+        printf("Player-%d Details: \n", i + 1);
+        printf("Jersy Number=%d, Runs Scored=%d \n", players[i][0], players[i][1]);
     }
+}
 
-    int n = atoi(argv[1]);
-    printf("Fibonacci series of %d terms is: ", n);
-    printFibonacci(n, 1, 2); // Start with the first two terms as 1 and 2
-    printf("\n");
+int main()
+{
+    int playerDetails[11][2] = {{0}}; // 11 rows and 2 columns
+    readDetailsOfPlayers(playerDetails);
+    printDetailsOfPlayers(playerDetails, 11, 2);
 }
